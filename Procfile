@@ -1,0 +1,1 @@
+web: gunicorn CRM_Django.wsgi --log-file -

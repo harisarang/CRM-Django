@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'o29okdckpvh2-^05w$t#lwbq5!%jv1fu3ru(j72h+&32u6z8i)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['crm-django-python.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
-    'django_filters'
+    'django_filters',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -78,8 +79,12 @@ WSGI_APPLICATION = 'CRM_Django.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'crm',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'database-2.cybi45ufb57i.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -138,3 +143,11 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'thirusenthilv@gmail.com'
 EMAIL_HOST_PASSWORD = 'harisaran080102#'
+
+AWS_ACCESS_KEY_ID = 'AKIATC73F5M7F7MXEGGF'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'crm-staticfiles'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
