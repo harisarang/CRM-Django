@@ -7,23 +7,28 @@
     }
 </style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <img src="{% static 'images/logo.png' %}" alt="">
+    <a href="{% url 'home' %}" class="ml-5">
+        <h2><span class="badge badge-warning">CRM</span></h2>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse ml-4" id="navbarNav">
       <ul class="navbar-nav">
         {% if request.user.is_staff %}
             <li class="nav-item active">
-            <a class="nav-link" href="#">Dashboard</a>
+            <a class="nav-link" href="{% url 'home' %}">Dashboard</a>
             </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Products</a>
+            <li class="nav-item active">
+            <a class="nav-link" href="{% url 'product' %}">Products</a>
             </li>
         {% else %}
-            <li class="nav-item">
-             <a class="nav-link" href="{% url 'account' %}">Settings</a>
-           </li>
+            <li class="nav-item active">
+             <a class="nav-link" href="{% url 'account' %}">Account</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'place_order' %}">Place Order</a>
+            </li>
         {% endif %}
       </ul>
     </div>

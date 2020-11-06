@@ -128,7 +128,7 @@ def updateOrder(request, pk):
     context = {
         'form': form,
     }
-    return render(request, 'accounts/order_form.html', context)
+    return render(request, 'accounts/update_order.html', context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
@@ -181,3 +181,24 @@ def accountSettings(request):
             form.save()
             
     return render(request, 'accounts/account_settings.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
+def placeOrder(request):
+    OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=10)
+    customer = request.user.customer
+    formset = OrderFormSet(queryset=Order.objects.none() ,instance=customer)
+    # form = OrderForm(initial={
+    #     'customer': customer,
+    # })
+    if request.method == 'POST':
+        # print('Printing POST', request.POST)
+        formset = OrderFormSet(request.POST, instance=customer)
+        if formset.is_valid():
+            formset.save()
+            return redirect('/')
+        
+    context = {
+        'formset': formset,
+    }
+    return render(request, 'accounts/order_form.html', context)

@@ -12,6 +12,7 @@ urlpatterns = [
     path('customer/<str:pk>/', views.customer, name="customer"),
     path('product/', views.product, name="product"),
     path('create_order/<str:pk>', views.createOrder, name="create_order"),
+    path('place_order/', views.placeOrder, name="place_order"),
     path('update_order/<str:pk>', views.updateOrder, name="update_order"),
     path('delete_order/<str:pk>', views.deleteOrder, name="delete_order"),
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name='accounts/password_reset.html'), name="password_reset"),
