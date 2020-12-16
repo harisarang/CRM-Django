@@ -79,12 +79,8 @@ WSGI_APPLICATION = 'CRM_Django.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'crm',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'database-2.cybi45ufb57i.us-east-1.rds.amazonaws.com',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
