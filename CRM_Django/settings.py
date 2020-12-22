@@ -84,6 +84,9 @@ DATABASES = {
     }
 }
 
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -120,30 +123,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/images/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 #SMTP Configuration
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'thirusenthilv@gmail.com'
-EMAIL_HOST_PASSWORD = 'harisaran080102#'
-
-AWS_ACCESS_KEY_ID = 'AKIATC73F5M7F7MXEGGF'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'crm-staticfiles'
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
